@@ -103,6 +103,9 @@ Node<T>* LinkedList<T>::getLast() const {
 
 template<typename T>
 bool LinkedList<T>::Check(int count) {
+    
+    // Checks if our list contains the assumed amount of elements
+    
     if (count == 0 ^ (this->sentinel == this->sentinel->next)) {
         return false;
     }
@@ -134,7 +137,7 @@ std::ostream& operator<<(std::ostream& stream, LinkedList<T>& list) {
             s += std::to_string(node->getData()) + ", ";
             node = node->getNext();
         }
-        s += std::to_string(list.getLast().getData()) + "]";
+        s += std::to_string(list.getLast()->getData()) + "]";
     } else {
         s = "[]";
     }
