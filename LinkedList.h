@@ -21,7 +21,6 @@ class LinkedList {
     public:
         LinkedList<T>();
         ~LinkedList<T>();
-        //Node<T>* getCurrent();
         void addFront(const T data);
         void addBack(const T data);
         T popFront();
@@ -46,21 +45,14 @@ LinkedList<T>::~LinkedList() {
     delete sentinel;
 }
 
-/*template<typename T>
-Node<T>* LinkedList<T>::getCurrent() {
-    return this->current;
-}*/
-
 template<typename T>
 void LinkedList<T>::addFront(const T data) {
     sentinel->insertAfter(data);
-    //new Node<T>(data, current, current->next);
 }
 
 template<typename T>
 void LinkedList<T>::addBack(const T data) {
     sentinel->insertBefore(data);
-    //new Node<T>(data, current->previous, current);
 }
 
 template<typename T>
@@ -85,6 +77,8 @@ T LinkedList<T>::popBack() {
 
 template<typename T>
 bool LinkedList<T>::isEmpty() const {
+    // If the sentinel nodde points to itself, it means that
+    // the list is empty of nodes
     if (sentinel == sentinel->next) {
         return true;
     }
@@ -103,7 +97,6 @@ Node<T>* LinkedList<T>::getLast() const {
 
 template<typename T>
 bool LinkedList<T>::Check(int count) {
-    
     // Checks if our list contains the assumed amount of elements
     
     if (count == 0 ^ (this->sentinel == this->sentinel->next)) {
