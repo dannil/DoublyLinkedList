@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
     
     cout << t << endl;
     cout << t.get(7) << endl;
-    cout << t.getSize() << endl;
+    cout << t.size() << endl;
     //t.addFront(6);
     
     cout << endl;
@@ -30,7 +30,7 @@ int main(int argc, char *argv[]) {
     t1.popBack();
     
     cout << t1 << endl;
-    cout << t1.getSize() << endl;
+    cout << t1.size() << endl;
     
     LinkedList<int> t2;
     t2.addFront(3);
