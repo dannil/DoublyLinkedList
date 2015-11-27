@@ -34,8 +34,6 @@ class LinkedList {
         
         int size() const;
         bool isEmpty() const;
-        
-        bool Check(int count);
 };
 
 template<typename T>
@@ -126,39 +124,15 @@ int LinkedList<T>::size() const {
     int size;
     Node<T>* node = getFirst();
     
-    while(node != getLast()) {
-        size++;
-        node = node->next;
-    }
-    
     if (!isEmpty()) {
-        size++;
+        while(node != getLast()) {
+            size++;
+            node = node->next;
+        }
+        size++;  
     }
     
     return size;
-}
-
-template<typename T>
-bool LinkedList<T>::Check(int count) {
-    // Checks if our list contains the assumed amount of elements
-    
-    if (count == 0 ^ (this->sentinel == this->sentinel->next)) {
-        return false;
-    }
-    if (this->getFirst() != this->sentinel->next) {
-        return (this->getLast() != this->sentinel->previous && count == 0);
-    }
-    if (this->getLast() != this->sentinel->previous && count == 0) {
-        return false;
-    }
-    
-    Node<T>* node = this->getFirst();
-    while (count > 0) {
-        count--;
-        
-        node = node->next;
-    }
-    return (node == this->sentinel && count == 0);
 }
 
 template<typename T>
