@@ -16,7 +16,6 @@ template<typename T>
 class LinkedList {
 
     private:
-        int m_size;
         Node<T> *m_sentinel;
 
     public:
@@ -40,7 +39,6 @@ class LinkedList {
 template<typename T>
 LinkedList<T>::LinkedList() {
     // Sentinel node
-    m_size = 0;
     m_sentinel = new Node<T>();
 }
 
@@ -54,13 +52,11 @@ LinkedList<T>::~LinkedList() {
 
 template<typename T>
 void LinkedList<T>::addFront(const T data) {
-    m_size++;
     m_sentinel->insertAfter(data);
 }
 
 template<typename T>
 void LinkedList<T>::addBack(const T data) {
-    m_size++;
     m_sentinel->insertBefore(data);
 }
 
@@ -69,9 +65,6 @@ T LinkedList<T>::popFront() {
 //    if (isEmpty()) {
 //        throw std::out_of_range("LinkedList is empty");
 //    }
-    if (!isEmpty()) {
-        m_size--;
-    }
     T data = m_sentinel->getNext()->getData();
     delete m_sentinel->getNext();
     return data;
@@ -82,9 +75,6 @@ T LinkedList<T>::popBack() {
 //    if (isEmpty()) {
 //        throw std::out_of_range("LinkedList is empty");
 //    }
-    if (!isEmpty()) {
-        m_size--;
-    }
     T data = m_sentinel->getPrevious()->getData();
     delete m_sentinel->getPrevious();
     return data;
@@ -92,21 +82,12 @@ T LinkedList<T>::popBack() {
 
 template<typename T>
 T LinkedList<T>::get(int i) const {
-    if (i < m_size / 2) {
-        // Loop first to last
-        Node<T>* node = m_sentinel->getNext();
-        for (int j = 0; j < i; j++) {
-            node = node->getNext();
-        }
-        return node->getData();
-    } else {
-        // Loop last to first
-        Node<T>* node = m_sentinel->getPrevious();
-        for (int j = i; j >= i; j--) {
-            node = node->getPrevious();
-        }
-        return node->getData();
+    // Loop first to last
+    Node<T>* node = m_sentinel->getNext();
+    for (int j = 0; j < i; j++) {
+        node = node->getNext();
     }
+    return node->getData();
 }
 
 template<typename T>
@@ -131,7 +112,17 @@ bool LinkedList<T>::isEmpty() const {
 
 template<typename T>
 int LinkedList<T>::size() const {
-    return m_size;
+    int size = 0;
+    if (!isEmpty()) {
+        Node<T>* node = getFirst();
+        while(node != getLast()) {
+            size++;
+            node = node->getNext();
+        }
+        // Add 1 since we miss the last node
+        size++;  
+    }
+    return size;
 }
 
 template<typename T>
