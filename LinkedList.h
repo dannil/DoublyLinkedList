@@ -16,6 +16,7 @@ template<typename T>
 class LinkedList {
 
     private:
+        int size;
         Node<T> *sentinel;
 
     public:
@@ -39,7 +40,8 @@ class LinkedList {
 template<typename T>
 LinkedList<T>::LinkedList() {
     // Sentinel node
-    this->sentinel = new Node<T>();
+    size = 0;
+    sentinel = new Node<T>();
 }
 
 template<typename T>
@@ -52,11 +54,13 @@ LinkedList<T>::~LinkedList() {
 
 template<typename T>
 void LinkedList<T>::addFront(const T data) {
+    size++;
     sentinel->insertAfter(data);
 }
 
 template<typename T>
 void LinkedList<T>::addBack(const T data) {
+    size++;
     sentinel->insertBefore(data);
 }
 
@@ -65,6 +69,9 @@ T LinkedList<T>::popFront() {
 //    if (isEmpty()) {
 //        throw std::out_of_range("LinkedList is empty");
 //    }
+    if (!isEmpty()) {
+        size--;
+    }
     T data = sentinel->next->data;
     delete sentinel->next;
     return data;
@@ -75,6 +82,9 @@ T LinkedList<T>::popBack() {
 //    if (isEmpty()) {
 //        throw std::out_of_range("LinkedList is empty");
 //    }
+    if (!isEmpty()) {
+        size--;
+    }
     T data = sentinel->previous->data;
     delete sentinel->previous;
     return data;
@@ -82,7 +92,7 @@ T LinkedList<T>::popBack() {
 
 template<typename T>
 T LinkedList<T>::get(int i) const {
-    if (i < size() / 2) {
+    if (i < size / 2) {
         // Loop first to last
         Node<T>* node = sentinel->next;
         for (int j = 0; j < i; j++) {
@@ -121,17 +131,6 @@ bool LinkedList<T>::isEmpty() const {
 
 template<typename T>
 int LinkedList<T>::size() const {
-    int size;
-    Node<T>* node = getFirst();
-    
-    if (!isEmpty()) {
-        while(node != getLast()) {
-            size++;
-            node = node->next;
-        }
-        size++;  
-    }
-    
     return size;
 }
 
