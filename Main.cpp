@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int main() {
+int main(int argc, char *argv[]) {
     LinkedList<int> t;
     t.addFront(1);
     t.addFront(2);
@@ -18,9 +18,10 @@ int main() {
     
     cout << t << endl;
     cout << t.get(7) << endl;
-    cout << t.size() << endl;
+    cout << t.getSize() << endl;
     //t.addFront(6);
     
+    cout << endl;
     
     LinkedList<int> t1;
     t1.addBack(3);
@@ -29,13 +30,12 @@ int main() {
     t1.popBack();
     
     cout << t1 << endl;
-    cout << t1.size() << endl;
+    cout << t1.getSize() << endl;
     
     LinkedList<int> t2;
     t2.addFront(3);
     t2.addBack(4);
-    int value = t2.get(0);
-    cout << value << endl;
+    cout << t2.get(0) << endl;
 
     //cin.get();
 

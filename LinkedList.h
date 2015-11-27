@@ -10,9 +10,6 @@
 using namespace std;
 
 template<typename T>
-class Node;
-
-template<typename T>
 class LinkedList {
 
     private:
@@ -33,7 +30,7 @@ class LinkedList {
         Node<T>* getFirst() const;
         Node<T>* getLast() const;
         
-        int size() const;
+        int getSize() const;
         bool isEmpty() const;
 };
 
@@ -47,7 +44,7 @@ LinkedList<T>::LinkedList() {
 template<typename T>
 LinkedList<T>::~LinkedList() {
     while (!isEmpty()) {
-        delete sentinel->next;
+        delete sentinel->getNext();
     }
     delete sentinel;
 }
@@ -72,8 +69,8 @@ T LinkedList<T>::popFront() {
     if (!isEmpty()) {
         size--;
     }
-    T data = sentinel->next->data;
-    delete sentinel->next;
+    T data = sentinel->getNext()->getData();
+    delete sentinel->getNext();
     return data;
 }
 
@@ -85,8 +82,8 @@ T LinkedList<T>::popBack() {
     if (!isEmpty()) {
         size--;
     }
-    T data = sentinel->previous->data;
-    delete sentinel->previous;
+    T data = sentinel->getPrevious()->getData();
+    delete sentinel->getPrevious();
     return data;
 }
 
@@ -94,43 +91,43 @@ template<typename T>
 T LinkedList<T>::get(int i) const {
     if (i < size / 2) {
         // Loop first to last
-        Node<T>* node = sentinel->next;
+        Node<T>* node = sentinel->getNext();
         for (int j = 0; j < i; j++) {
-            node = node->next;
+            node = node->getNext();
         }
-        return node->data;
+        return node->getData();
     } else {
         // Loop last to first
-        Node<T>* node = sentinel->previous;
+        Node<T>* node = sentinel->getPrevious();
         for (int j = i; j >= i; j--) {
-            node = node->previous;
+            node = node->getPrevious();
         }
-        return node->data;
+        return node->getData();
     }
 }
 
 template<typename T>
 Node<T>* LinkedList<T>::getFirst() const {
-    return sentinel->next;
+    return sentinel->getNext();
 }
 
 template<typename T>
 Node<T>* LinkedList<T>::getLast() const {
-    return sentinel->previous;
+    return sentinel->getPrevious();
 }
 
 template<typename T>
 bool LinkedList<T>::isEmpty() const {
     // If the sentinel nodde points to itself, it means that
     // the list is empty of nodes
-    if (sentinel == sentinel->next) {
+    if (sentinel == sentinel->getNext()) {
         return true;
     }
     return false;
 }
 
 template<typename T>
-int LinkedList<T>::size() const {
+int LinkedList<T>::getSize() const {
     return size;
 }
 

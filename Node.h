@@ -6,9 +6,6 @@
 template<typename T>
 class Node {
 
-    template<typename U>
-    friend class LinkedList;
-
     private:
         T data;
         Node<T> *previous, *next;
