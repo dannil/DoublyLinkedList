@@ -25,9 +25,12 @@ int main() {
     assert(t.Check(8));
     t.addBack(-1);
     assert(t.Check(9));
-    //t.addFront(6);
     
     cout << t << endl;
+    cout << t.get(7) << endl;
+    cout << t.size() << endl;
+    //t.addFront(6);
+    
     
     LinkedList<int> t1;
     assert(t1.Check(0));
@@ -40,6 +43,13 @@ int main() {
     assert(t1.Check(0));
     
     cout << t1 << endl;
+    cout << t1.size() << endl;
+    
+    LinkedList<int> t2;
+    t2.addFront(3);
+    t2.addBack(4);
+    int value = t2.get(0);
+    cout << value << endl;
 
     //cin.get();
 

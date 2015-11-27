@@ -21,13 +21,20 @@ class LinkedList {
     public:
         LinkedList<T>();
         ~LinkedList<T>();
+        
         void addFront(const T data);
         void addBack(const T data);
+        
         T popFront();
         T popBack();
-        bool isEmpty() const;
+        
+        T get(int i) const;
         Node<T>* getFirst() const;
         Node<T>* getLast() const;
+        
+        int size() const;
+        bool isEmpty() const;
+        
         bool Check(int count);
 };
 
@@ -76,13 +83,22 @@ T LinkedList<T>::popBack() {
 }
 
 template<typename T>
-bool LinkedList<T>::isEmpty() const {
-    // If the sentinel nodde points to itself, it means that
-    // the list is empty of nodes
-    if (sentinel == sentinel->next) {
-        return true;
+T LinkedList<T>::get(int i) const {
+    if (i < size() / 2) {
+        // Loop first to last
+        Node<T>* node = sentinel->next;
+        for (int j = 0; j < i; j++) {
+            node = node->next;
+        }
+        return node->data;
+    } else {
+        // Loop last to first
+        Node<T>* node = sentinel->previous;
+        for (int j = i; j >= i; j--) {
+            node = node->previous;
+        }
+        return node->data;
     }
-    return false;
 }
 
 template<typename T>
@@ -93,6 +109,33 @@ Node<T>* LinkedList<T>::getFirst() const {
 template<typename T>
 Node<T>* LinkedList<T>::getLast() const {
     return sentinel->previous;
+}
+
+template<typename T>
+bool LinkedList<T>::isEmpty() const {
+    // If the sentinel nodde points to itself, it means that
+    // the list is empty of nodes
+    if (sentinel == sentinel->next) {
+        return true;
+    }
+    return false;
+}
+
+template<typename T>
+int LinkedList<T>::size() const {
+    int size;
+    Node<T>* node = getFirst();
+    
+    while(node != getLast()) {
+        size++;
+        node = node->next;
+    }
+    
+    if (!isEmpty()) {
+        size++;
+    }
+    
+    return size;
 }
 
 template<typename T>
