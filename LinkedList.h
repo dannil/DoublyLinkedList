@@ -10,6 +10,9 @@
 using namespace std;
 
 template<typename T>
+class Node;
+
+template<typename T>
 class LinkedList {
 
     private:
