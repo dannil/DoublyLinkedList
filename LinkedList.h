@@ -22,8 +22,8 @@ class LinkedList {
         LinkedList<T>();
         ~LinkedList<T>();
         
-        void addFront(const T data);
-        void addBack(const T data);
+        void addFront(const T& data);
+        void addBack(const T& data);
         
         T popFront();
         T popBack();
@@ -33,7 +33,7 @@ class LinkedList {
         Node<T>* getLast() const;
         
         int size() const;
-        bool contains(const T data) const;
+        bool contains(const T& data) const;
         bool isEmpty() const;
 };
 
@@ -52,12 +52,12 @@ LinkedList<T>::~LinkedList() {
 }
 
 template<typename T>
-void LinkedList<T>::addFront(const T data) {
+void LinkedList<T>::addFront(const T& data) {
     m_sentinel->insertAfter(data);
 }
 
 template<typename T>
-void LinkedList<T>::addBack(const T data) {
+void LinkedList<T>::addBack(const T& data) {
     m_sentinel->insertBefore(data);
 }
 
@@ -113,7 +113,7 @@ int LinkedList<T>::size() const {
 }
 
 template<typename T>
-bool LinkedList<T>::contains(const T data) const {
+bool LinkedList<T>::contains(const T& data) const {
     Node<T>* node = getFirst();
     while (node->getNext() != m_sentinel) {
         if (node->getData() == data) {
