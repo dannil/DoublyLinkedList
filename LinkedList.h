@@ -33,6 +33,7 @@ class LinkedList {
         Node<T>* getLast() const;
         
         int size() const;
+        bool contains(const T data) const;
         bool isEmpty() const;
 };
 
@@ -83,7 +84,7 @@ T LinkedList<T>::popBack() {
 template<typename T>
 T LinkedList<T>::get(int i) const {
     // Loop first to last
-    Node<T>* node = m_sentinel->getNext();
+    Node<T>* node = getFirst();
     for (int j = 0; j < i; j++) {
         node = node->getNext();
     }
@@ -101,28 +102,36 @@ Node<T>* LinkedList<T>::getLast() const {
 }
 
 template<typename T>
-bool LinkedList<T>::isEmpty() const {
-    // If the sentinel nodde points to itself, it means that
-    // the list is empty of nodes
-    if (m_sentinel == m_sentinel->getNext()) {
-        return true;
+int LinkedList<T>::size() const {
+    int size = 0;
+    Node<T>* node = getFirst();
+    while (node != m_sentinel) {
+        size++;
+        node = node->getNext();
+    }
+    return size;
+}
+
+template<typename T>
+bool LinkedList<T>::contains(const T data) const {
+    Node<T>* node = getFirst();
+    while (node->getNext() != m_sentinel) {
+        if (node->getData() == data) {
+            return true;
+        }
+        node = node->getNext();
     }
     return false;
 }
 
 template<typename T>
-int LinkedList<T>::size() const {
-    int size = 0;
-    if (!isEmpty()) {
-        Node<T>* node = getFirst();
-        while(node != getLast()) {
-            size++;
-            node = node->getNext();
-        }
-        // Add 1 since we miss the last node
-        size++;  
+bool LinkedList<T>::isEmpty() const {
+    // If the sentinel node points to itself, it means that
+    // the list is empty of nodes
+    if (m_sentinel == m_sentinel->getNext()) {
+        return true;
     }
-    return size;
+    return false;
 }
 
 template<typename T>

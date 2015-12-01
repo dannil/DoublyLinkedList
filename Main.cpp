@@ -17,9 +17,9 @@ int main(int argc, char *argv[]) {
     t.addBack(-1);
     
     cout << t << endl;
-    cout << t.get(7) << endl;
     cout << t.size() << endl;
-    //t.addFront(6);
+    cout << t.contains(5) << endl;
+    cout << t.contains(-100) << endl;
     
     cout << endl;
     
@@ -32,10 +32,12 @@ int main(int argc, char *argv[]) {
     cout << t1 << endl;
     cout << t1.size() << endl;
     
+    
+    cout << endl;
+    
     LinkedList<int> t2;
     t2.addFront(3);
     t2.addBack(4);
-    cout << t2.get(0) << endl;
 
     //cin.get();
 
